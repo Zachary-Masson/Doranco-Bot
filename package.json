@@ -1,0 +1,33 @@
+{
+  "name": "doranco-bot",
+  "version": "0.0.1",
+  "description": "Bot pour l'école doranco",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "dev": "nodemon main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevNetworktm/Doranco-Bot.git"
+  },
+  "keywords": [
+    "discord.js",
+    "devnetwork",
+    "discord",
+    "bot",
+    "nodejs"
+  ],
+  "author": "DevNetwork <devnetworkytb@outlook.fr>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DevNetworktm/Doranco-Bot/issues"
+  },
+  "homepage": "https://github.com/DevNetworktm/Doranco-Bot#readme",
+  "dependencies": {
+    "@discordjs/rest": "^0.3.0",
+    "discord-api-types": "^0.30.0",
+    "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0"
+  }
+}
