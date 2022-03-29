@@ -8,7 +8,7 @@
 ## 📚 Dependence Bot Use
 
 - 💎 NodeJs V 16.14.2 [(NodeJs)](https://nodejs.org/en/)
-- 💎 DiscordJs V 13.6.0 [(NodeJs)](https://discord.js.org/)
+- 💎 DiscordJs V 13.6.0 [(DiscordJs)](https://discord.js.org/)
 
 ## 💻 Use API/Temp Client
 
