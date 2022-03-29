@@ -3,14 +3,14 @@
 - 🔧 [Doranco](https://www.doranco.fr/).
 - 🎉 [Support Discord](any).
 - 🔖 V 0.0.2
-- ⚙️ The back-end is still in development
+- ⚙️ The bot is still in development
 
 ## 📚 Dependence Bot Use
 
 - 💎 NodeJs V 16.14.2 [(NodeJs)](https://nodejs.org/en/)
 - 💎 DiscordJs V 13.6.0 [(DiscordJs)](https://discord.js.org/)
 
-## 💻 Use API/Temp Client
+## 💻 Use Bot
 
 - Add and Config the ENV file in ".env" and add var "BOT_TOKEN=[your token]"
 
