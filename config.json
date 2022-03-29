@@ -1,4 +1,6 @@
 {
   "debug": true,
-  "debug_commands": true
+  "debug_commands": true,
+  "debug_menu": true,
+  "welcome_message": "Bienvenue sur le serveur doranco veuillez vous enregistrer avec la command '/connect [surname] [name]'"
 }

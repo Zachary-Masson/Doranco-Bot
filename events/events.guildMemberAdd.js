@@ -1,4 +1,5 @@
 const { GuildMember } = require("discord.js");
+const CONFIG = require("../config.json");
 
 class Events {
   _data;
@@ -14,7 +15,9 @@ class Events {
    * @param {Object} events
    * @param {GuildMember} member
    */
-  execute(events, client, member) {}
+  execute(events, client, member) {
+    member.send(CONFIG.welcome_message);
+  }
 }
 
 module.exports = Events;

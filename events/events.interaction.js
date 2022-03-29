@@ -36,7 +36,7 @@ class Events {
         interaction.member.user.tag
       );
       if (
-        !command.data["permissions"] ||
+        command.data["permissions"] &&
         !interaction.member.permissions.has(command.data["permissions"])
       )
         return interaction.reply({
@@ -46,6 +46,14 @@ class Events {
       else {
         command.execute(events, client, interaction);
       }
+    } else if (interaction.isSelectMenu()) {
+      const { customId } = interaction;
+      const menu = client.interaction.menus.filter(
+        (menu) => menu.data.customId === customId
+      )[0];
+      if (!menu) return;
+      events.emit("client.debug.menus", customId, interaction.member.user.tag);
+      menu.execute(events, client, interaction);
     }
   }
 }

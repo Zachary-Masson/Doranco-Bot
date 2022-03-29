@@ -9,14 +9,19 @@ class Commands {
   _data;
   constructor() {
     this._data = {
-      name: "setupmenu",
-      description: "Commande pour setup le menu pour choisir sa filière !",
-      permissions: "ADMINISTRATOR",
+      name: "connect",
+      description: "Commande pour se connecter",
       options: [
         {
-          type: 7,
-          name: "channel",
-          description: "Salon ou le menu va être envoyer",
+          type: 3,
+          name: "surname",
+          description: "Votre nom de famille",
+          required: true,
+        },
+        {
+          type: 3,
+          name: "name",
+          description: "Votre prénom",
           required: true,
         },
       ],
@@ -31,12 +36,16 @@ class Commands {
    */
   execute(events, client, interaction) {
     const { options } = interaction;
-    const channel = options.getChannel("channel");
-    if (!channel || channel.type !== "GUILD_TEXT")
+    const surname = options.getString("surname");
+    const name = options.getString("name");
+
+    if (interaction.member.permissions.has("ADMINISTRATOR"))
       return interaction.reply({
-        content: "Le Salon choisie n'est pas un salon de type Text !",
         ephemeral: true,
+        content:
+          "Vous avez une permissions trop importante pour que je puisse changer votre pseudo !",
       });
+    interaction.member.setNickname(`${surname} ${name}`);
 
     const menu = new MessageSelectMenu()
       .setCustomId("choiceFaculty")
@@ -61,13 +70,10 @@ class Commands {
         value: "IMEP",
       });
 
-    channel.send({
-      components: [new MessageActionRow().addComponents(menu)],
-    });
-
     interaction.reply({
       ephemeral: true,
-      content: "Le menu a correctement était envoyer !",
+      content: "Veuillez choisir votre filière !",
+      components: [new MessageActionRow().addComponents(menu)],
     });
   }
 }

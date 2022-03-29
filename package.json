@@ -1,6 +1,6 @@
 {
   "name": "doranco-bot",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Bot pour l'école doranco",
   "main": "main.js",
   "scripts": {

@@ -94,6 +94,7 @@ class clientClass {
     });
     this._client["interaction"] = new Object();
     this._client["interaction"]["commands"] = new Array();
+    this._client["interaction"]["menus"] = new Array();
     if (CONFIG.debug) await this.debug();
     await this.launch();
     await this.events();
@@ -115,13 +116,14 @@ class clientClass {
       );
       this._events.emit(
         "client.debug",
-        `   [\x1b[32mDEBUG\x1b[0m] Events "${_data.name}" est initialiser`
+        `   [\x1b[32mDEBUG\x1b[0m] Event "${_data.name}" est initialiser`
       );
     });
   }
 
   async interaction() {
     await this.commands();
+    await this.menus();
     new DeployInteractionClass(this._client, this._events);
   }
 
@@ -142,7 +144,29 @@ class clientClass {
       });
       this._events.emit(
         "client.debug",
-        `   [\x1b[32mDEBUG\x1b[0m] Commands "${_data.name}" est initialiser`
+        `   [\x1b[32mDEBUG\x1b[0m] Command "${_data.name}" est initialiser`
+      );
+    });
+  }
+
+  async menus() {
+    this._events.emit("client.debug", "");
+    this._events.emit("client.debug", "\x1b[36mMenus ↓\x1b[0m");
+    const menusFiles = await readdirSync(
+      `${this._dirname}/interaction/menus`
+    ).filter(
+      (fileName) => fileName.endsWith(".js") && fileName.startsWith("menu.")
+    );
+    await menusFiles.map(async (fileName) => {
+      const menuClass = require(`${this._dirname}/interaction/menus/${fileName}`);
+      const { _data, execute } = new menuClass();
+      await this._client["interaction"]["menus"].push({
+        data: _data,
+        execute,
+      });
+      this._events.emit(
+        "client.debug",
+        `   [\x1b[32mDEBUG\x1b[0m] Menu "${_data.customId}" est initialiser`
       );
     });
   }
@@ -162,6 +186,16 @@ class clientClass {
       this._events.on("client.debug.commands", (commandName, userTag) => {
         console.log(
           `   [\x1b[33mCommands\x1b[0m] '\x1b[33m${commandName}\x1b[0m' par <\x1b[34m${userTag}\x1b[0m> le ${moment().format(
+            "L [à] LT"
+          )}`
+        );
+      });
+    }
+
+    if (CONFIG.debug_menu) {
+      this._events.on("client.debug.menus", (customId, userTag) => {
+        console.log(
+          `   [\x1b[35mMenus\x1b[0m] '\x1b[35m${customId}\x1b[0m' par <\x1b[34m${userTag}\x1b[0m> le ${moment().format(
             "L [à] LT"
           )}`
         );
