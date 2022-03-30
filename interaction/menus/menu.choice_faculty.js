@@ -21,8 +21,9 @@ class Menu {
    */
   execute(events, client, interaction) {
     const faculty = interaction.values[0];
+
     interaction.member.setNickname(
-      `${interaction.member.user.username} | ${faculty}`
+      `${interaction.member.nickname} | ${faculty}`
     );
     interaction.reply({
       ephemeral: true,
